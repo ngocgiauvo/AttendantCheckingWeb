@@ -9,7 +9,7 @@
     "prod": "cross-env NODE_ENV=production & node ./bin/www",
     "client": "ng serve --aot",
     "server": "supervisor ./bin/www",
-    "build": "ng build",
+    "build": "ng build --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -17,7 +17,7 @@
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.2",
+    "@agm/core": "1.0.0-beta.2",
     "@angular/cli": "1.2.6",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
