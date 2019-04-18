@@ -1,5 +1,5 @@
 import { Component, OnInit,HostListener,OnDestroy } from '@angular/core';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 import { Router } from '@angular/router';
 import { StudentService, AppService, CourseService,AuthService,QuizService,SocketService} from '../../shared.module';
 declare var jQuery:any;
@@ -65,7 +65,7 @@ export class QuizDisplayComponent implements OnInit,OnDestroy {
 		
 	}
 
-	public constructor(public  localStorage: LocalStorageService,public  router: Router,public quizService: QuizService,
+	public constructor(public  router: Router,public quizService: QuizService,
 		public appService: AppService,public socketService: SocketService,public studentService: StudentService) {
 		socketService.consumeEventOnJoinedQuiz();
         socketService.invokeJoinedQuiz.subscribe(result => {
@@ -93,16 +93,16 @@ export class QuizDisplayComponent implements OnInit,OnDestroy {
         });
 	}
 	public ngOnInit() {
-		if(this.localStorage.get('get_published_quiz_error')){
-			this.get_published_quiz_error = this.localStorage.get('get_published_quiz_error');
+		if( localStorage.get('get_published_quiz_error')){
+			this.get_published_quiz_error =  localStorage.get('get_published_quiz_error');
 		}
 		else{
-			this.selected_attendance = this.localStorage.get('selected_attendance');
-			if(!this.localStorage.get('quiz_code')){
+			this.selected_attendance = localStorage.get('selected_attendance');
+			if(!localStorage.get('quiz_code')){
 				this.get_published_quiz_error = 'Quiz is stopped';
 			}else{
-				this.quiz_code = this.localStorage.get('quiz_code').toString();
-				this.localStorage.remove('quiz_code');
+				this.quiz_code = localStorage.get('quiz_code').toString();
+				localStorage.remove('quiz_code');
 				this.getQuiz();
 			}
 		}

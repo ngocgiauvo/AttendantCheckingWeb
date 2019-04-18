@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService, AuthService } from '../shared/shared.module';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 @Component({
     selector: 'app-change-password',
     templateUrl: './change-password.component.html',
 })
 export class ChangePasswordComponent implements OnInit {
-    constructor(public  route: ActivatedRoute, public  appService: AppService,public  authService: AuthService, public router: Router, public localStorage: LocalStorageService) {}
+    constructor(public  route: ActivatedRoute, public  appService: AppService,public  authService: AuthService, public router: Router) {}
 
     public ngOnInit() {
 

@@ -4,11 +4,11 @@ import { Observable, Operator } from 'rxjs';
 import { AppConfig } from '../config'
 import { Router } from '@angular/router';
 
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 
 @Injectable()
 export class AuthService {
-	public constructor(public  http: Http,public  appConfig : AppConfig,public  router:Router,public  localStorage : LocalStorageService) {}
+	public constructor(public  http: Http,public  appConfig : AppConfig,public  router:Router, ) {}
     // isLoggedIn: boolean = false;
     public token :string = '';
     // store the URL to redirect after logging in
@@ -46,16 +46,16 @@ export class AuthService {
         this.token = '';
         this.current_user = '';
         //delete from localStorage
-        this.localStorage.set('isLoggedIn',false);
-        this.localStorage.remove('token','current_user');
+        localStorage.set('isLoggedIn',false);
+        localStorage.remove('token','current_user');
     }
 
     public  forgotPasswordUrl = this.appConfig.host + '/authenticate/forgot-password';
     public forgotPassword(email : string): Observable < { result: string, message: string} > {
         this.token = '';
         this.current_user = '';
-        this.localStorage.set('isLoggedIn',false);
-        this.localStorage.remove('token','current_user');
+        localStorage.set('isLoggedIn',false);
+        localStorage.remove('token','current_user');
         var params = {
             'email': email,
         };
@@ -89,7 +89,7 @@ export class AuthService {
     }
 
     public saveCurrentUserToLocal(){
-        this.localStorage.set('current_user',this.current_user);
+        localStorage.set('current_user',this.current_user);
     }
 
     public registerCheckUrl = this.appConfig.host + '/authenticate/register-check';

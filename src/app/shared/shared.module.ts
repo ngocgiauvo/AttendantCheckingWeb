@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 import { TabsModule,TooltipModule } from 'ngx-bootstrap';
 import { QRCodeModule } from 'angular2-qrcode';
 import {TranslateModule} from '@ngx-translate/core';
-import { LocalStorageModule } from 'angular-2-local-storage';
 import {FileUploadModule} from "ng2-file-upload";
 import { AppConfig } from './config'
 import { AgmCoreModule } from '@agm/core';
@@ -84,10 +83,6 @@ export {MapService};
     FormsModule,
     TabsModule,
     QRCodeModule,
-    LocalStorageModule.withConfig({
-            prefix: 'qldd',
-            storageType: 'localStorage'
-        }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAaHGDoehkovVBMyKmJL1Q-7-4wZRYpqVg'
     }),

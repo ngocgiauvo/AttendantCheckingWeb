@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy, ElementRef } from '@angular/co
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {  AppService, AuthService ,SocketService, AttendanceService , 
     SendFeedbackModalComponent, TeacherService, CourseService} from '../../shared/shared.module';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 declare var jQuery:any;
 @Component({
 	selector: 'app-dashboard-teacher',
@@ -12,7 +12,7 @@ export class DashboardTeacherComponent implements OnInit, OnDestroy {
 
 	public opening_attendances = [];
     public uploaded_avatar = null;
-	constructor(public  router: Router,public element: ElementRef,public  localStorage : LocalStorageService,public socketService: SocketService ,
+	constructor(public  router: Router,public element: ElementRef, public socketService: SocketService ,
         public  appService: AppService,public  authService: AuthService,public  attendanceService: AttendanceService, public  teacherService: TeacherService,public  courseService : CourseService) {
 	    socketService.consumeEventOnCheckAttendanceCreated();
         socketService.invokeCheckAttendanceCreated.subscribe(result=>{
@@ -186,8 +186,8 @@ export class DashboardTeacherComponent implements OnInit, OnDestroy {
     	}
     }
     public confirmAction(){
-    	this.localStorage.set('check_attendance_course_id',this.selected_course['id']);
-        this.localStorage.set('check_attendance_class_id',this.selected_course['class_id']);
+    	localStorage.set('check_attendance_course_id',this.selected_course['id']);
+        localStorage.set('check_attendance_class_id',this.selected_course['class_id']);
     	this.router.navigate(['/check-attendance']);
     }
     public onChangePassword(){

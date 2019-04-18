@@ -1,5 +1,5 @@
 import { Component, OnInit,HostListener } from '@angular/core';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-page-not-found',
@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 export class QRCodeComponent implements OnInit {
 	public data = "localhost.com:4200";
 	public size = 0;
-	public constructor(public  localStorage: LocalStorageService,public  router: Router) {}
+	public constructor(public  router: Router) {}
 	public ngOnInit() {
-		this.data = this.localStorage.get('qrCodeData').toString();
+		this.data = localStorage.get('qrCodeData').toString();
 		if(!this.data || this.data == undefined){
 			this.router.navigate(['/dashboard']);
 		}
-		this.localStorage.remove('qrCodeData');
+		localStorage.remove('qrCodeData');
 
 		this.onResize();
 	}
