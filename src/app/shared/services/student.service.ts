@@ -4,12 +4,12 @@ import { Observable } from 'rxjs';
 import { AppConfig } from '../config';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 @Injectable()
 export class StudentService {
     // Resolve HTTP using the constructor
     public constructor(public  http: Http, public  appConfig: AppConfig, public  authService: AuthService,
-        public  router:Router,public localStorage: LocalStorageService) {}
+        public  router:Router, ) {}
         // private instance variable to hold base url
     public  getListStudentsUrl = this.appConfig.apiHost + '/student/list';
     public getListStudents(program_id: number, class_id: number,status : number,searchText: string, page: number = 1, limit: number = 10): Observable < { result: string, total_items: number, student_list: Array<any>, message:string } > {
@@ -323,7 +323,7 @@ export class StudentService {
             'course_id': course_id,
             'class_id': class_id,
         };
-        let authToken = this.authService.token ? this.authService.token : this.localStorage.get('token');
+        let authToken = this.authService.token ? this.authService.token : localStorage.get('token');
         let headers = new Headers();
         headers.append('x-access-token', `${authToken}`);
         let options = new RequestOptions({ headers: headers });

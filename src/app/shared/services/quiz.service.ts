@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
@@ -11,7 +11,7 @@ import { AppConfig } from '../config';
 export class QuizService {
     // Resolve HTTP using the constructor
     public constructor(public  http: Http,public  appService: AppService,public  appConfig:AppConfig,
-    public  authService: AuthService,public  router:Router, public localStorage: LocalStorageService) {}
+    public  authService: AuthService,public  router:Router,  ) {}
 
     //load quiz template for teacher
     public getQuizByCourseAndClassUrl = this.appConfig.apiHost + '/quiz/list';
@@ -43,7 +43,7 @@ export class QuizService {
         var params = {
             'quiz_code': quiz_code,
         };
-        let authToken = this.authService.token ? this.authService.token : this.localStorage.get('token');
+        let authToken = this.authService.token ? this.authService.token : localStorage.get('token');
         let headers = new Headers();
         headers.append('x-access-token', `${authToken}`);
         let options = new RequestOptions({ headers: headers });
@@ -66,7 +66,7 @@ export class QuizService {
         var params = {
             'quiz_code': quiz_code,
         };
-        let authToken = this.authService.token ? this.authService.token : this.localStorage.get('token');
+        let authToken = this.authService.token ? this.authService.token : localStorage.get('token');
         let headers = new Headers();
         headers.append('x-access-token', `${authToken}`);
         let options = new RequestOptions({ headers: headers });
@@ -114,7 +114,7 @@ export class QuizService {
         var params = {
             'quiz_code': quiz_code
         };
-        let authToken = this.authService.token ? this.authService.token : this.localStorage.get('token');
+        let authToken = this.authService.token ? this.authService.token : localStorage.get('token');
         let headers = new Headers();
         headers.append('x-access-token', `${authToken}`);
         let options = new RequestOptions({ headers: headers });
@@ -232,7 +232,7 @@ export class QuizService {
             'checked_student_list' : checked_student_list,
             'quiz': quiz
         };
-        let authToken = this.authService.token ? this.authService.token : this.localStorage.get('token');
+        let authToken = this.authService.token ? this.authService.token : localStorage.get('token');
         let headers = new Headers();
         headers.append('x-access-token', `${authToken}`);
         let options = new RequestOptions({ headers: headers });
@@ -255,7 +255,7 @@ export class QuizService {
         var params = {
             'number_of_question' : number_of_question
         };
-        let authToken = this.authService.token ? this.authService.token : this.localStorage.get('token');
+        let authToken = this.authService.token ? this.authService.token : localStorage.get('token');
         let headers = new Headers();
         headers.append('x-access-token', `${authToken}`);
         let options = new RequestOptions({ headers: headers });

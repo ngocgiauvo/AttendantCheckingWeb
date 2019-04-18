@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { AppService, AuthService } from '../shared/shared.module';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 declare var jQuery: any;
 @Component({
     selector: 'app-register',
@@ -9,7 +9,7 @@ declare var jQuery: any;
 })
 export class RegisterComponent implements OnInit {
     public constructor(public  route: ActivatedRoute, public  appService: AppService, public  authService: AuthService,
-     public  router: Router, public  localStorage: LocalStorageService,public element: ElementRef) {}
+     public  router: Router, public element: ElementRef) {}
 
     public ngOnInit() {
         this.route.params.subscribe(params => { this.reset_token = params['token'] });

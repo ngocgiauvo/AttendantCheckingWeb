@@ -4,7 +4,7 @@ import { AppService } from '../../services/app.service';
 import { SocketService } from '../../services/socket.service';
 import { NotificationService } from '../../services/notification.service';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 import {TranslateService} from '@ngx-translate/core';
 @Component({
   selector: 'app-top-navigation',
@@ -14,13 +14,13 @@ export class TopNavigationComponent implements OnInit {
 
 	public constructor(public  router:Router,public  authService : AuthService,public socketService: SocketService,
 	public notificationService: NotificationService,public appService: AppService,
-	public translate: TranslateService , public  localStorage : LocalStorageService) {
+	public translate: TranslateService ,  ) {
 		// this language will be used as a fallback when a translation isn't found in the current language
       //   translate.setDefaultLang('vi');
       //    // the lang to use, if the lang isn't available, it will use the current loader to get them
-	     // if(this.localStorage.get('language') != null){
-	     // 	 translate.use(this.localStorage.get('language').toString());
-	     // 	 this.selected_language = this.localStorage.get('language').toString();
+	     // if(localStorage.get('language') != null){
+	     // 	 translate.use(localStorage.get('language').toString());
+	     // 	 this.selected_language = localStorage.get('language').toString();
 	     // }else{
 	     // 	this.translate.use('vi');
 	     // }
@@ -47,7 +47,7 @@ export class TopNavigationComponent implements OnInit {
 	];
 	public onChangeLanguage() {
 		// this.translate.use(this.selected_language);
-		// this.localStorage.set('language',this.selected_language);
+		// localStorage.set('language',this.selected_language);
 	}
 	public notifications = [];
 	public getNotification(){

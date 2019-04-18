@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { CanActivate, CanActivateChild, CanLoad, Route, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AuthService} from './auth.service';
 import { AppService } from './app.service';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 @Injectable()
 export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad {
-    public constructor(public  appService: AppService, public  authService: AuthService, public  router: Router,public  localStorage : LocalStorageService) {}
+    public constructor(public  appService: AppService, public  authService: AuthService, public  router: Router, ) {}
 
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let url: string = state.url;
@@ -96,9 +96,9 @@ export class AuthGuardService implements CanActivate, CanActivateChild, CanLoad 
         return true;
     }
     public checkLogin(url: string): boolean {
-        if (this.localStorage.get('isLoggedIn')) {
-            this.authService.current_user = this.localStorage.get('current_user');
-            this.authService.token = this.localStorage.get('token').toString();
+        if (localStorage.get('isLoggedIn')) {
+            this.authService.current_user = localStorage.get('current_user');
+            this.authService.token = localStorage.get('token').toString();
             return this.checkRole(url);
         }
 

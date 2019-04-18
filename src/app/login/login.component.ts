@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService, AuthService } from '../shared/shared.module';
 import { Router } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
-    public constructor(public  appService: AppService, public  authService: AuthService, public  router: Router,public  localStorage : LocalStorageService) {}
+    public constructor(public  appService: AppService, public  authService: AuthService, public  router: Router, ) {}
 
     public ngOnInit() {
-        if (this.localStorage.get('isLoggedIn')) {
-            this.authService.current_user = this.localStorage.get('current_user');
-            this.authService.token = this.localStorage.get('token').toString();
+        if (localStorage.get('isLoggedIn')) {
+            this.authService.current_user = localStorage.get('current_user');
+            this.authService.token = localStorage.get('token').toString();
             this.router.navigate(['/dashboard']);
         }
     }
@@ -33,9 +33,9 @@ export class LoginComponent implements OnInit {
                 this.authService.current_user = results.user;
 
                 //save to localStorage
-                this.localStorage.set('isLoggedIn',true);
-                this.localStorage.set('token',results.token);
-                this.localStorage.set('current_user',results.user);
+                localStorage.set('isLoggedIn',true);
+                localStorage.set('token',results.token);
+                localStorage.set('current_user',results.user);
 
                 //let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/dashboard';
                 this.router.navigate(['/dashboard']);

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AppService, AttendanceService, AuthService,SocketService, AppConfig, CheckAttendanceService } from '../../shared/shared.module';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 declare var jQuery: any;
 @Component({
     selector: 'check-attendance-student',
@@ -10,7 +10,7 @@ declare var jQuery: any;
 export class CheckAttendanceStudentComponent implements OnInit, OnDestroy {
     public stopped_modal_message;
     public constructor(public checkAttendanceService: CheckAttendanceService, public appConfig: AppConfig, public socketService: SocketService,
-        public authService: AuthService, public attendanceService: AttendanceService, public localStorage: LocalStorageService, public appService: AppService, public router: Router) {
+        public authService: AuthService, public attendanceService: AttendanceService,  public appService: AppService, public router: Router) {
         socketService.consumeEventOnCheckAttendanceUpdated();
         socketService.invokeCheckAttendanceUpdated.subscribe(result=>{
             if(this.delegate_detail['course_id'] == result['course_id'] && this.delegate_detail['class_id'] == result['class_id']){

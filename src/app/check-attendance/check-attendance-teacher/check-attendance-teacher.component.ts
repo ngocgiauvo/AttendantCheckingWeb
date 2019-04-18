@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AppService, AttendanceService, AuthService, SocketService, AppConfig, CheckAttendanceService, StudentService } from '../../shared/shared.module';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 declare var jQuery:any;
 @Component({
     selector: 'check-attendance-teacher',
@@ -10,7 +10,7 @@ declare var jQuery:any;
 export class CheckAttendanceTeacherComponent implements OnInit, OnDestroy {
     public stopped_modal_message;
     public constructor(public checkAttendanceService : CheckAttendanceService,public appConfig: AppConfig,public socketService: SocketService ,
-        public authService: AuthService, public attendanceService: AttendanceService, public localStorage: LocalStorageService,
+        public authService: AuthService, public attendanceService: AttendanceService,
          public appService: AppService, public router: Router, public studentService : StudentService) {
         socketService.consumeEventOnCheckAttendanceUpdated();
         socketService.invokeCheckAttendanceUpdated.subscribe(result=>{
@@ -163,9 +163,9 @@ export class CheckAttendanceTeacherComponent implements OnInit, OnDestroy {
         this.attendanceService.getOpeningAttendanceCourse(this.authService.current_user.id)
             .subscribe(result => {
                 this.opening_attendances = result.opening_attendances;
-                this.selected_course_id = this.localStorage.get('check_attendance_course_id');
-                this.selected_class_id = this.localStorage.get('check_attendance_class_id');
-                this.localStorage.remove('check_attendance_course_id', 'check_attendance_class_id');
+                this.selected_course_id = localStorage.get('check_attendance_course_id');
+                this.selected_class_id = localStorage.get('check_attendance_class_id');
+                localStorage.remove('check_attendance_course_id', 'check_attendance_class_id');
 
                 if (this.opening_attendances.length == 0) {
                     if(this.selected_course_id && this.selected_class_id){
@@ -253,9 +253,9 @@ export class CheckAttendanceTeacherComponent implements OnInit, OnDestroy {
     public confirmCancelAttendanceSession(){
         this.attendanceService.cancelAttendance(this.selected_attendance['id']).subscribe(result=>{
             if(result.result == 'success'){
-                var temp_attendance = this.localStorage.get('selected_attendance');
+                var temp_attendance = localStorage.get('selected_attendance');
                 if(temp_attendance && this.selected_attendance['id'] == temp_attendance['id']){
-                    this.localStorage.remove('selected_attendance');
+                    localStorage.remove('selected_attendance');
                 }
                 this.socketService.emitEventOnCheckAttendanceStopped({
                     message: 'cancelled by ' + this.authService.current_user.first_name + ' ' + this.authService.current_user.last_name,
@@ -270,9 +270,9 @@ export class CheckAttendanceTeacherComponent implements OnInit, OnDestroy {
     public confirmCloseAttendanceSession(){
         this.attendanceService.closeAttendance(this.selected_attendance['id']).subscribe(result=>{
             if(result.result == 'success'){
-                var temp_attendance = this.localStorage.get('selected_attendance');
+                var temp_attendance = localStorage.get('selected_attendance');
                 if(temp_attendance && this.selected_attendance['id'] == temp_attendance['id']){
-                    this.localStorage.remove('selected_attendance');
+                    localStorage.remove('selected_attendance');
                 }
                 this.socketService.emitEventOnCheckAttendanceStopped({
                     message: 'closed by ' + this.authService.current_user.first_name + ' ' + this.authService.current_user.last_name,
@@ -288,7 +288,7 @@ export class CheckAttendanceTeacherComponent implements OnInit, OnDestroy {
     }
     public generateQRCode(){
         var check_attendance_url = this.appConfig.apiHost + "/check-attendance/qr-code/" + this.selected_attendance_id;
-        this.localStorage.set('qrCodeData',check_attendance_url);
+        localStorage.set('qrCodeData',check_attendance_url);
         window.open(this.appConfig.host + '/qr-code', '_blank', 'height=300,width=300,scrollbars=yes,status=0,toolbar=0,menubar=0,location=0');
     }
     public generateDelegateCode(){
@@ -298,7 +298,7 @@ export class CheckAttendanceTeacherComponent implements OnInit, OnDestroy {
         },error=>{this.appService.showPNotify('failure', "Server Error! Can't generate delegate code", 'error');});
     }
     public generateQuiz(){
-        this.localStorage.set('selected_attendance',this.selected_attendance);
+        localStorage.set('selected_attendance',this.selected_attendance);
         this.router.navigate(['/check-attendance/quiz/']);
     }
     public onAttendanceCheckClick(student_index: number, attendance_detail_index: number) {

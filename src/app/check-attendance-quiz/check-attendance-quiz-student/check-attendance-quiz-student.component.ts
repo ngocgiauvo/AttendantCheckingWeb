@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy,HostListener } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AppService, AttendanceService, AuthService, SocketService, AppConfig, CheckAttendanceService, QuizService } from '../../shared/shared.module';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 declare var jQuery: any;
 @Component({
     selector: 'check-attendance-quiz-student',
@@ -32,7 +32,7 @@ export class CheckAttendanceQuizStudentComponent implements OnInit, OnDestroy {
 
     public constructor(public quizService: QuizService, public checkAttendanceService: CheckAttendanceService,
         public appConfig: AppConfig, public socketService: SocketService, public authService: AuthService,
-        public attendanceService: AttendanceService, public localStorage: LocalStorageService, public appService: AppService,
+        public attendanceService: AttendanceService,  public appService: AppService,
         public router: Router) {
     }
     @HostListener('window:unload', ['$event'])

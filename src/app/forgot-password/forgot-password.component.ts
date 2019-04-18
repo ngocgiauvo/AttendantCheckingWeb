@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService, AuthService } from '../shared/shared.module';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
+ 
 @Component({
     selector: 'app-forgot-password',
     templateUrl: './forgot-password.component.html',
 })
 export class ForgotPasswordComponent implements OnInit {
-    public constructor(public  route: ActivatedRoute, public  appService: AppService, public  authService: AuthService, public  router: Router, public  localStorage: LocalStorageService) {}
+    public constructor(public  route: ActivatedRoute, public  appService: AppService, public  authService: AuthService, public  router: Router) {}
 
     public ngOnInit() {
         this.route.params.subscribe(params => { this.reset_token = params['token'] });
